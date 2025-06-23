@@ -23,9 +23,20 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: build and release to DockerHub
         env:
+          REPO: actiontest
+        run:
+          docker build -t $REPO .
+
+      - name: tagging
+        env:
           NAME: yjsco653
           REPO: actiontest
         run:
-          docker build -t . $REPO:latest
           docker tag $REPO:latest $NAME/$REPO:latest
+          
+      - name: Release To DockerHub
+        env:
+          NAME: yjsco653
+          REPO: actiontest
+        run:
           docker push $NAME/$REPO:latest
