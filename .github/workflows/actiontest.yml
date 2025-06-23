@@ -26,6 +26,6 @@ jobs:
           NAME: yjsco653
           REPO: actiontest
         run:
-          docker build -t $REPO .
+          docker build -t $REPO:latest .
           docker tag $REPO:latest $NAME/$REPO:latest
           docker push $NAME/$REPO:latest
